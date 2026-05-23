@@ -6,9 +6,19 @@
 /*   By: ayanaga <ayanaga@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 20:11:44 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/05/22 22:51:19 by ayanaga          ###   ########.fr       */
+/*   Updated: 2026/05/23 23:25:06 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+static char	*free_null(char *s)
+{
+	free(s);
+	return (NULL);
+}
 
 static char	*buf_insert(char *buf, ssize_t count, char *copy, ssize_t read_file)
 {
@@ -20,10 +30,7 @@ static char	*buf_insert(char *buf, ssize_t count, char *copy, ssize_t read_file)
 	j = 0;
 	copy_all = malloc(sizeof(char) * (count + read_file + 1));
 	if (!copy_all)
-	{
-		free(copy);
-		return (NULL);
-	}
+		return (free_null(copy));
 	if (copy)
 	{
 		while (copy[i])
@@ -80,18 +87,12 @@ static char	*n_copy(char *copy, ssize_t count, char **return_word)
 	j = 0;
 	i = cut_word(copy, return_word);
 	if (i == -1)
-	{
-		free(copy);
-		return (NULL);
-	}
+		return (free_null(copy));
 	if (copy[i] == '\0')
-	{
-		free(copy);
-		return (NULL);
-	}
+		return (free_null(copy));
 	copy_new = malloc(sizeof(char) * (count - i) + 1);
 	if (!copy_new)
-		return (NULL);
+		return (free_null(copy));
 	while (copy[i])
 	{
 		copy_new[j] = copy[i];
@@ -115,11 +116,17 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (1)
 	{
+		if (copy)
+		{
+			if (ft_strchr(copy, '\n'))
+				break ;
+		}
 		read_file = read(fd, buf, BUFFER_SIZE);
 		if (read_file < 0)
 		{
-			free(buf);
-			return (NULL);
+			free(copy);
+			copy = NULL;
+			return (free_null(buf));
 		}
 		if (read_file == 0)
 			break ;
@@ -128,18 +135,40 @@ char	*get_next_line(int fd)
 			copy = buf_insert(buf, ft_strlen(copy), copy, read_file);
 		else
 			copy = buf_insert(buf, 0, copy, read_file);
-		if (ft_strchr(copy, '\n'))
-			break ;
+		if (!copy)
+			return (free_null(buf));
 	}
 	if (!copy || copy[0] == '\0')
 	{
-		free(buf);
 		free(copy);
 		copy = NULL;
-		return (NULL);
+		return (free_null(buf));
 	}
 	return_word = NULL;
 	copy = n_copy(copy, ft_strlen(copy), &return_word);
 	free(buf);
 	return (return_word);
+}
+
+#include <fcntl.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+
+	fd = open("test.txt", O_RDONLY);
+	if (fd < 0)
+		return (1);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
 }
