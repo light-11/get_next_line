@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayanaga <ayanaga@student.42.ja>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/19 20:11:44 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/06/04 07:54:43 by ayanaga          ###   ########.fr       */
+/*   Created: 2026/05/28 23:48:13 by ayanaga           #+#    #+#             */
+/*   Updated: 2026/06/04 07:54:56 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+#include <limits.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -108,7 +109,7 @@ char	*get_file_and_copy(int fd, char *buf, char *copy, ssize_t read_file)
 char	*get_next_line(int fd)
 {
 	char		*buf;
-	static char	*copy;
+	static char	*copy[OPEN_MAX];
 	ssize_t		read_file;
 	char		*return_word;
 
@@ -116,15 +117,15 @@ char	*get_next_line(int fd)
 	if (!buf)
 		return (NULL);
 	read_file = 0;
-	copy = get_file_and_copy(fd, buf, copy, read_file);
-	if (!copy || copy[0] == '\0')
+	copy[fd] = get_file_and_copy(fd, buf, copy[fd], read_file);
+	if (!copy[fd] || copy[fd][0] == '\0')
 	{
-		free(copy);
-		copy = NULL;
+		free(copy[fd]);
+		copy[fd] = NULL;
 		return (free_null(buf));
 	}
 	return_word = NULL;
-	copy = n_copy(copy, ft_strlen(copy), &return_word);
+	copy[fd] = n_copy(copy[fd], ft_strlen(copy[fd]), &return_word);
 	free(buf);
 	return (return_word);
 }
@@ -134,35 +135,32 @@ char	*get_next_line(int fd)
 
 // int	main(void)
 // {
-// 	int		fd;
-// 	char	*line;
+// 	int fd1;
+// 	int fd2;
+// 	char *line;
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
+// 	fd1 = open("a.txt", O_RDONLY);
+// 	fd2 = open("b.txt", O_RDONLY);
+// 	if (fd1 < 0 || fd2 < 0)
 // 		return (1);
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL)
-// 			break ;
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
 
-// int	main(void)
-// {
-// 	char	*line;
+// 	line = get_next_line(fd1);
+// 	printf("fd1: %s", line);
+// 	free(line);
 
-// 	while (1)
-// 	{
-// 		line = get_next_line(0);
-// 		if (!line)
-// 			break ;
-// 		printf("%s", line);
-// 		free(line);
-// 	}
+// 	line = get_next_line(fd2);
+// 	printf("fd2: %s", line);
+// 	free(line);
+
+// 	line = get_next_line(fd1);
+// 	printf("fd1: %s", line);
+// 	free(line);
+
+// 	line = get_next_line(fd2);
+// 	printf("fd2: %s", line);
+// 	free(line);
+
+// 	close(fd1);
+// 	close(fd2);
 // 	return (0);
 // }

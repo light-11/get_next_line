@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayanaga <ayanaga@student.42.ja>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/20 22:40:31 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/05/28 23:31:10 by ayanaga          ###   ########.fr       */
+/*   Created: 2026/05/28 23:48:57 by ayanaga           #+#    #+#             */
+/*   Updated: 2026/06/04 05:56:58 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+#include <limits.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stddef.h>
 
 size_t	ft_strlen(char *s)
 {
@@ -43,9 +44,9 @@ char	*ft_strchr(char *s, int c)
 
 char	*n_copy(char *copy, ssize_t count, char **return_word)
 {
-	int		i;
-	int		j;
-	char	*copy_new;
+	int i;
+	int j;
+	char *copy_new;
 
 	i = 0;
 	j = 0;
