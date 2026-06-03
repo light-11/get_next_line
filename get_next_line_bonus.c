@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayanaga <ayanaga@student.42.ja>            +#+  +:+       +#+        */
+/*   By: ayanaga <ayanaga@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 23:48:13 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/06/04 07:54:56 by ayanaga          ###   ########.fr       */
+/*   Updated: 2026/06/04 08:06:40 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	cut_word(char *copy, char **return_word)
 	(*return_word)[j] = '\0';
 	return (j);
 }
+
 char	*get_file_and_copy(int fd, char *buf, char *copy, ssize_t read_file)
 {
 	while (1)

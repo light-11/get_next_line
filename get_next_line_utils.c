@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayanaga <ayanaga@student.42.ja>            +#+  +:+       +#+        */
+/*   By: ayanaga <ayanaga@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 22:40:31 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/05/28 23:31:10 by ayanaga          ###   ########.fr       */
+/*   Updated: 2026/06/04 08:07:07 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stddef.h>
 
 size_t	ft_strlen(char *s)
 {
