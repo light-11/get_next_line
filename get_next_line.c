@@ -6,7 +6,7 @@
 /*   By: ayanaga <ayanaga@student.42.ja>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 20:11:44 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/06/04 07:54:43 by ayanaga          ###   ########.fr       */
+/*   Updated: 2026/06/09 22:48:49 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ char	*get_next_line(int fd)
 	ssize_t		read_file;
 	char		*return_word;
 
+	if (fd < 0)
+		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
@@ -138,8 +140,6 @@ char	*get_next_line(int fd)
 // 	char	*line;
 
 // 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 		return (1);
 // 	while (1)
 // 	{
 // 		line = get_next_line(fd);
