@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayanaga <ayanaga@student.42.ja>            +#+  +:+       +#+        */
+/*   By: ayanaga <ayanaga@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 19:35:35 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/05/28 23:39:07 by ayanaga          ###   ########.fr       */
+/*   Updated: 2026/06/09 23:13:07 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 char	*get_next_line(int fd);
 char	*free_null(char *s);
 char	*buf_insert(char *buf, ssize_t count, char *copy, ssize_t read_file);
-int cut_word(char *copy, char **return_word);
+int		cut_word(char *copy, char **return_word);
 char	*get_file_and_copy(int fd, char *buf, char *copy, ssize_t read_file);
 
 size_t	ft_strlen(char *str);

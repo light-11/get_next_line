@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayanaga <ayanaga@student.42.ja>            +#+  +:+       +#+        */
+/*   By: ayanaga <ayanaga@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 23:48:57 by ayanaga           #+#    #+#             */
-/*   Updated: 2026/06/04 05:56:58 by ayanaga          ###   ########.fr       */
+/*   Updated: 2026/06/09 23:18:55 by ayanaga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ char	*ft_strchr(char *s, int c)
 
 char	*n_copy(char *copy, ssize_t count, char **return_word)
 {
-	int i;
-	int j;
-	char *copy_new;
+	int		i;
+	int		j;
+	char	*copy_new;
 
 	i = 0;
 	j = 0;
